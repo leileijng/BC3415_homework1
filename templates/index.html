@@ -1,13 +1,61 @@
-<h2>Welcome to AI Agent</h2>
-
-<form action="/ai_agent" method="post">
-    <input type="submit" value="AI Agent">
-</form>
-
-<form action="/prediction" method="post">
-    <input type="submit" value="Homepage">
-</form>
-
-<form action="/sg_joke" method="post">
-    <input type="submit" value="SG Joke">
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('https://source.unsplash.com/1600x900/?ai,technology');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 10%;
+        }
+        h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        form {
+            margin: 10px 0;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome to AI Agent</h2>
+        <form action="/ai_agent" method="post">
+            <input type="submit" value="AI Agent">
+        </form>
+        <form action="/prediction" method="post">
+            <input type="submit" value="Homepage">
+        </form>
+        <form action="/sg_joke" method="post">
+            <input type="submit" value="SG Joke">
+        </form>
+    </div>
+</body>
+</html>
