@@ -1,52 +1,46 @@
 from flask import Flask, render_template, request
 import google.generativeai as palm
 import os
-import openai
 
-api = 'AIzaSyCjWNEcNHym512r1fmc0CNgq1LWSwC6iyQ'
-palm.configure(api_key=api)
-model = {"model": "models/chat-bison-001"}
+api = os.environ.get('GOOGLE_KEY')
+palm.configure(api_key=os)
+# Define the new model (replace with an appropriate model name)
+model = "text-bison-001"
 
-open_api_key = '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'
-os.environ['OPENAI_API_KEY'] = open_api_key
-client = openai.OpenAI()
-
-app = Flask(__name__) #confirm the app ownership
+app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"]) 
 def index():
-    return(render_template('index.html'))
+    return render_template('index.html')
 
-
-@app.route("/ai_agent",methods=["GET","POST"])
+@app.route("/ai_agent", methods=["GET", "POST"])
 def ai_agent():
-    return(render_template("ai_agent.html"))
+    return render_template("ai_agent.html")
 
-
-@app.route("/ai_agent_reply",methods=["GET","POST"])
+@app.route("/ai_agent_reply", methods=["GET", "POST"])
 def ai_agent_reply():
     q = request.form.get("q")
-    r = client.chat.completions.create(
-        model='gpt-3.5-turbo-0125',
-        messages=[{"role": "user",
-                   "content": q}])
-    return(render_template("ai_agent_reply.html", r=r.choices[0].message.content))
+    response = palm.generate_text(
+        model=model,
+        prompt=q,
+        temperature=0.7,
+        max_output_tokens=200
+    )
+    return render_template("ai_agent_reply.html", r=response.result)
 
-
-@app.route("/prediction",methods=["GET","POST"])
+@app.route("/prediction", methods=["GET", "POST"])
 def prediction():
-    return(render_template("index.html"))
+    return render_template("index.html")
 
-
-@app.route("/sg_joke",methods=["GET","POST"])
+@app.route("/sg_joke", methods=["GET", "POST"])
 def sg_joke():
-    r = client.chat.completions.create(
-        model='gpt-3.5-turbo-0125',
-        messages=[{"role": "user",
-                   "content": "Tell me a joke about Singapore"}])
-    return(render_template("sg_joke.html", sg_joke=r.choices[0].message.content))
-
+    response = palm.generate_text(
+        model=model,
+        prompt="Tell me a joke about Singapore.",
+        temperature=0.7,
+        max_output_tokens=50
+    )
+    return render_template("sg_joke.html", sg_joke=response.result)
 
 if __name__ == "__main__":
     app.run()
-    
