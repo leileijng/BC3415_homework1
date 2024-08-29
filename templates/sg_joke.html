@@ -1,6 +1,71 @@
-<h2>Joke about Singapore</h2>
-<h4>{{sg_joke}}</h4>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singapore Joke</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5; /* Light background color */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-<form action="/" method="post">
-    <input type="submit" value="Main">
-</form>
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 400px;
+        }
+
+        h2 {
+            color: #ff4500; /* Vibrant orange-red for the header */
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        h4 {
+            color: #333333; /* Dark gray for better readability */
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        form {
+            margin: 0;
+        }
+
+        input[type="submit"] {
+            background-color: #008CBA; /* Blue color for the button */
+            color: white;
+            padding: 10px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #005f7f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Joke about Singapore</h2>
+        <h4>{{sg_joke}}</h4>
+
+        <form action="/" method="post">
+            <input type="submit" value="Back to Main">
+        </form>
+    </div>
+</body>
+</html>
