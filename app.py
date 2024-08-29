@@ -33,7 +33,7 @@ def ai_agent_reply():
         )
         return render_template("ai_agent_reply.html", r=response.result)
     except google_exceptions.InvalidArgument as e:
-        return render_template("ai_agent_reply.html", r=generate_jokes_when_api_is_down())
+        return f"Error: {str(e)}"
 
 @app.route("/prediction", methods=["GET", "POST"])
 def prediction():
@@ -50,7 +50,7 @@ def sg_joke():
         )
         return render_template("sg_joke.html", sg_joke=response.result)
     except google_exceptions.InvalidArgument as e:
-        return f"Error: {str(e)}"
+        return render_template("ai_agent_reply.html", r=generate_jokes_when_api_is_down())
 
 def generate_jokes_when_api_is_down():
     jokes = [
