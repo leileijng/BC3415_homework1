@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import google.generativeai as palm
 import google.api_core.exceptions as google_exceptions
 import os
+import random
 
 # Configure the API key
 api = os.environ.get('GOOGLE_KEY')
@@ -32,6 +33,7 @@ def ai_agent_reply():
         )
         return render_template("ai_agent_reply.html", r=response.result)
     except google_exceptions.InvalidArgument as e:
+        return render_template("ai_agent_reply.html", r=generate_jokes_when_api_is_down())
         return f"Error: {str(e)}"
 
 @app.route("/prediction", methods=["GET", "POST"])
@@ -50,6 +52,21 @@ def sg_joke():
         return render_template("sg_joke.html", sg_joke=response.result)
     except google_exceptions.InvalidArgument as e:
         return f"Error: {str(e)}"
+
+def generate_jokes_when_api_is_down():
+    jokes = [
+        "Why did the Singaporean bring an umbrella to the bank? Because he heard it was always good to protect your “capital”!",
+        "Why don’t Singaporeans play hide and seek? Because good luck hiding in a country this small!",
+        "Why do Singaporeans always carry a tissue packet? To reserve their seat at the hawker center, of course!",
+        "Why did the MRT never make a joke? Because it never crosses the line!",
+        "Why was the Singaporean traffic light so polite? It always said, 'Please cross now, thank you!'",
+        "What did the durian say to the rambutan? 'You’re cute, but I’ve got layers of flavor!'",
+        "Why don’t Singaporeans get lost? Because they have GPS—'Good People Sense'!",
+        "Why was the Singaporean so good at maths? Because he could count all the fines!",
+        "Why don’t Singaporeans sunbathe? Because they already live in the 'Lion City'!",
+        "What do you call a lazy Singaporean? A 'Siow-lan!'"
+    ]
+    return random.choice(jokes)
 
 if __name__ == "__main__":
     app.run()
